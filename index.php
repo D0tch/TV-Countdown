@@ -27,6 +27,8 @@
 		$title = $info[0]['show']['name'];
 		$poster_url = $info[0]['show']['image']['original'];
 		$poster_url = substr_replace($poster_url, 's', 4, 0);
+	 	$last_episode_link = json_decode(file_get_contents($info[0]['show']['_links']['previousepisode']['href']), true);
+	 	$last_episode_airstamp = $last_episode_link['airstamp'];
 	 	$next_episode_link = $info[0]['show']['_links']['nextepisode']['href'];
 		$episode_info = json_decode(file_get_contents($next_episode_link), true);
 		$next_episode_name = $episode_info['name'];
@@ -44,6 +46,7 @@
 			'next_episode_summary' => $next_episode_summary,
 			'season' => $season,
 			'episode' => $episode,
+			'last_episode_airtime' => $last_episode_airstamp,
 		];
 
 	endforeach;
@@ -66,14 +69,17 @@
 		  		  <div style="z-index: 10;">
 				    <h3><b><?php echo $countdown['title']; ?></b></h3>
 				    <h5 class="card-title"><b><?php echo $countdown['next_episode_name'] . ' (S'.$countdown['season'].'E'.$countdown['episode'].')'; ?></b></h5>
-				    <p class="card-text"><?php echo $countdown['next_episode_summary']; ?></p>
-					<p class="card-text" style="bottom: 20px; position: absolute;">
+				    <p class="card-text"><?php if($countdown['next_episode_summary']!=''){ echo $countdown['next_episode_summary']; } else { echo 'No episode summary avaliable.'; } ?></p>
+					<p class="card-text" style="font-size: large !important; bottom: 15px; position: absolute;">
 					<?php if($countdown['next_episode_airtime'] < time() + 86400 ){
 							$secs_to_air = $countdown['next_episode_airtime'] - time();
 							echo 'Airs in: ' . ceil($secs_to_air / 60 / 60) .  ' Hours';
 						}else{
 							echo 'Airs: '. date('d-m-Y H:i' , $countdown['next_episode_airtime']);
 						} ?>
+					</p>
+					<p class="card-text" style="bottom: 15px; position: absolute;">
+						<small>Last episode: <?php echo date('d-m-Y' , strtotime($countdown['last_episode_airtime'])); ?></small>
 					</p>
 		  		  </div>
 		  </div>
