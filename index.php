@@ -17,9 +17,11 @@
 			<div class="row">
 <?php
 
-	$shows = ['greys-anatomy' , 'silicon-valley' , 'homeland' , 'suits' , 'Designated-Survivor' , 'New-Girl'];
+	$shows = ['greys-anatomy' , 'silicon-valley' , 'suits' , 'Homeland' , 'Designated-Survivor' , 'New-Girl' , 'Westworld'];
 
 	$countdown_wrapper = array();
+
+ 	$i = 0;
 
 	foreach($shows as $show):
 
@@ -37,8 +39,13 @@
 		$season = $episode_info['season'];
 		$episode = $episode_info['number'];
 
+		if(!$next_episode_air_date):
 
-		$countdown_wrapper[$next_episode_air_date] = [
+			$next_episode_air_date = "1893456000";
+
+		endif;
+
+		$countdown_wrapper[$i] = [
 			'next_episode_airtime' => $next_episode_air_date ,
 			'title' => $title ,
 			'poster_url' => $poster_url ,
@@ -48,6 +55,8 @@
 			'episode' => $episode,
 			'last_episode_airtime' => $last_episode_airstamp,
 		];
+
+		$i++;
 
 	endforeach;
 

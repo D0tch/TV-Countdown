@@ -63,11 +63,6 @@ small {
   font-size: 80%;
 }
 
-::-webkit-file-upload-button {
-  font: inherit;
-  -webkit-appearance: button;
-}
-
 h3, h5 {
   margin-top: 0;
   margin-bottom: 0.66em;
@@ -161,14 +156,6 @@ small {
   bottom: 0;
   left: 0;
   padding: 1.25rem;
-}
-
-.page-link:not(:disabled):not(.disabled) {
-  cursor: pointer;
-}
-
-.close:not(:disabled):not(.disabled) {
-  cursor: pointer;
 }
 
 @supports ((-webkit-transform-style: preserve-3d) or (transform-style: preserve-3d)) {
