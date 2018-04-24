@@ -41,7 +41,7 @@
 
 		if(!$next_episode_air_date):
 
-			$next_episode_air_date = "1893456000";
+			$next_episode_air_date = "9999999999";
 
 		endif;
 
@@ -84,7 +84,11 @@
 							$secs_to_air = $countdown['next_episode_airtime'] - time();
 							echo 'Airs in: ' . ceil($secs_to_air / 60 / 60) .  ' Hours';
 						}else{
-							echo 'Airs: '. date('d-m-Y H:i' , $countdown['next_episode_airtime']);
+							if($countdown['next_episode_airtime']=='9999999999'):
+								echo 'No episodes avaliable';
+							else:
+								echo 'Airs: '. date('d-m-Y H:i' , $countdown['next_episode_airtime']);
+							endif;
 						} ?>
 					</p>
 					<p class="card-text" style="bottom: 15px; position: absolute;">
