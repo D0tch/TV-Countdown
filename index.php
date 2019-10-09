@@ -1,20 +1,3 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title>TvCountdown</title>
-		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-		<link href="style.css" rel="stylesheet">
-		<link href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" rel="stylesheet">
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
-	</head>
-	<body>
-
-		<div class="container-fluid" style="padding-top: 10px;">
-			<div class="row">
 <?php
 
 	$shows = ['greys-anatomy' , 'silicon-valley' , 'suits' , 'Homeland' , 'Designated-Survivor' , 'New-Girl' , 'Westworld'];
@@ -61,43 +44,58 @@
 	endforeach;
 
 	sort($countdown_wrapper);
+?>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>TvCountdown</title>
+		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+		<link href="style.css" rel="stylesheet">
+		<link href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" rel="stylesheet">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+	</head>
+	<body>
 
+		<div class="container-fluid" style="padding-top: 10px;">
+			<div class="row">
+<?php
 	foreach($countdown_wrapper as $countdown):
 
 		$img = $countdown['poster_url'];
 
 ?>
-
-
-
-	<div class="col-md-2 col-sm-12" style="height: 450px !important; min-height: 450px; margin-bottom: 8px;">
-		<div class="card bg-dark text-white"  style="height: 450px !important; min-height: 450px;">
-		  <div class="card-img-overlay" style="background-image: url('<?php echo $img; ?>'); background-size: cover;">
-		  		  <div style="position: absolute; top:0; left:0; width:100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1">
-		  		  </div>
-		  		  <div style="z-index: 10;">
-				    <h3><b><?php echo $countdown['title']; ?></b></h3>
-				    <h5 class="card-title"><b><?php echo $countdown['next_episode_name'] . ' (S'.$countdown['season'].'E'.$countdown['episode'].')'; ?></b></h5>
-				    <p class="card-text"><?php if($countdown['next_episode_summary']!=''){ echo $countdown['next_episode_summary']; } else { echo 'No episode summary avaliable.'; } ?></p>
-					<p class="card-text" style="font-size: large !important; bottom: 15px; position: absolute;">
-					<?php if($countdown['next_episode_airtime'] < time() + 86400 ){
-							$secs_to_air = $countdown['next_episode_airtime'] - time();
-							echo 'Airs in: ' . ceil($secs_to_air / 60 / 60) .  ' Hours';
-						}else{
-							if($countdown['next_episode_airtime']=='9999999999'):
-								echo 'No episodes avaliable';
-							else:
-								echo 'Airs: '. date('d-m-Y H:i' , $countdown['next_episode_airtime']);
-							endif;
-						} ?>
-					</p>
-					<p class="card-text" style="bottom: 15px; position: absolute;">
-						<small>Last episode: <?php echo date('d-m-Y' , strtotime($countdown['last_episode_airtime'])); ?></small>
-					</p>
-		  		  </div>
-		  </div>
-		</div>
-	</div>
+				<div class="col-md-2 col-sm-12" style="height: 450px !important; min-height: 450px; margin-bottom: 8px;">
+					<div class="card bg-dark text-white"  style="height: 450px !important; min-height: 450px;">
+					  <div class="card-img-overlay" style="background-image: url('<?php echo $img; ?>'); background-size: cover;">
+					  		  <div style="position: absolute; top:0; left:0; width:100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1">
+					  		  </div>
+					  		  <div style="z-index: 10;">
+							    <h3><b><?php echo $countdown['title']; ?></b></h3>
+							    <h5 class="card-title"><b><?php echo $countdown['next_episode_name'] . ' (S'.$countdown['season'].'E'.$countdown['episode'].')'; ?></b></h5>
+							    <p class="card-text"><?php if($countdown['next_episode_summary']!=''){ echo $countdown['next_episode_summary']; } else { echo 'No episode summary avaliable.'; } ?></p>
+								<p class="card-text" style="font-size: large !important; bottom: 15px; position: absolute;">
+								<?php if($countdown['next_episode_airtime'] < time() + 86400 ){
+										$secs_to_air = $countdown['next_episode_airtime'] - time();
+										echo 'Airs in: ' . ceil($secs_to_air / 60 / 60) .  ' Hours';
+									}else{
+										if($countdown['next_episode_airtime']=='9999999999'):
+											echo 'No episodes avaliable';
+										else:
+											echo 'Airs: '. date('d-m-Y H:i' , $countdown['next_episode_airtime']);
+										endif;
+									} ?>
+								</p>
+								<p class="card-text" style="bottom: 15px; position: absolute;">
+									<small>Last episode: <?php echo date('d-m-Y' , strtotime($countdown['last_episode_airtime'])); ?></small>
+								</p>
+					  		  </div>
+					  </div>
+					</div>
+				</div>
 
 	<?php endforeach; ?>
 			</div>
