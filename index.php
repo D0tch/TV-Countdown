@@ -1,6 +1,6 @@
 <?php
 
-	$shows = ['greys-anatomy' , 'silicon-valley' , 'suits' , 'Homeland' , 'Designated-Survivor' , 'New-Girl' , 'Westworld'];
+	$shows = ['greys-anatomy' , 'silicon-valley' , 'South-Park'];
 
 	$countdown_wrapper = array();
 
